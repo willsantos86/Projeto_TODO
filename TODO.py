@@ -15,7 +15,7 @@ import sqlite3
 
 conexao = sqlite3.connect('exercicio_TODO')
 cursor = conexao.cursor()
-cursor.execute('CREATE TABLE categorias (id_categorias INTEGER PRIMARY KEY AUTOINCREMENT, nome_categoria VARCHAR(100));')
+#cursor.execute('CREATE TABLE categorias (id_categorias INTEGER PRIMARY KEY AUTOINCREMENT, nome_categoria VARCHAR(100));')
 opcao = int(input('1- EXCLUIR TABELA\n2- ATUALIZAR O NOME DA TABELA\n3- CRIAR TABELA TAREFAS\n'))
 if opcao == 1:
     cursor.execute('DROP TABLE categorias_TODO')
