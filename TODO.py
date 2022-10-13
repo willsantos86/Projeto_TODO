@@ -18,29 +18,31 @@ cursor = conexao.cursor()
 #cursor.execute('CREATE TABLE categorias (id_categorias INTEGER PRIMARY KEY AUTOINCREMENT, nome_categoria VARCHAR(100));')
 #cursor.execute('CREATE TABLE tarefas(id_tarefas INTEGER PRIMARY KEY AUTOINCREMENT, nome_tarefa VARCHAR(100), status_tarefa VARCHAR(100), id_categorias INT NOT NULL, FOREIGN KEY(id_categorias) REFERENCES categorias(id_tarefas));')
 #cursor.execute('ALTER TABLE categorias RENAME TO categorias_TODO')
-
-opcao = int(input('1- INSERIR VALORES NAS TABELAS\n2- INSERIR COLUNAS NA TABELA CATEGORIAS\n3- INSERIR TAREFAS\n6- COLUNA'))
-print('-='*15)
+print(f'{"ESCOLHA UMA DAS OPÇÕES ABAIXO":^40}')
+print('*'*40)
+opcao = int(input('[1]- INSERIR NOVOS VALORES.\n[2]- ATUALIZAR DADOS.\n[3]- EXCLUIR.\n>>>> '))
+print('-='*20)
     
 if opcao == 1:
-    tabela = int(input('Qual Tabela deseja inserir valores'))
-    if 
-    nome_categoria = str(input('Digite a categoria:\n'))
-    valores = [nome_categoria]
-    inserir = 'INSERT INTO categorias(nome_categoria) VALUES(?)'
-    cursor.execute(inserir, valores)
+    tabela = int(input('QUAL TABELA DESEJA INSERIR NOVOS VALORES?\n>>> [1] CATEGORIAS ou [2] TAREFAS <<<\n'))
+
+    if tabela == 1:
+        nome_categoria = str(input('DIGITE A NOVA CATEGORIA:\n'))
+        valores = [nome_categoria]
+        inserir = 'INSERT INTO categorias(nome_categoria) VALUES(?)'
+        cursor.execute(inserir, valores)
 
     #cursor.execute('INSERT INTO categorias(nome_categoria) VALUES("Trabalho"), ("Familia"), ("Faculdade"), ("Casa");')
 
-elif opcao == 2:
-    nome_tarefa = str(input('Digite a tarefa:\n'))
-    status = str(input('Digite o status da tarefa:\n'))
-    categoria_id = str(input('Digite o ID da categoria:\nTRABALHO = 1\nFAMILIA = 2\nFACULDADE = 3\nCASA = 4\nIGREJA = 5\nVIAJEM = 6'))
-    valores = [nome_tarefa, status, categoria_id]
-    inserir = 'INSERT INTO tarefas(nome_tarefa, status_tarefa, id_categorias) VALUES(?, ?, ?)'
-    cursor.execute(inserir, valores)
+    elif tabela == 2:
+        nome_tarefa = str(input('DIGITE A NOVA TAREFA:\n'))
+        status = str(input('Digite o status da tarefa:\n'))
+        categoria_id = str(input('Digite o ID da categoria:\nTRABALHO = 1\nFAMILIA = 2\nFACULDADE = 3\nCASA = 4\nIGREJA = 5\nVIAJEM = 6'))
+        valores = [nome_tarefa, status, categoria_id]
+        inserir = 'INSERT INTO tarefas(nome_tarefa, status_tarefa, id_categorias) VALUES(?, ?, ?)'
+        cursor.execute(inserir, valores)
 
-elif opcao == 6:
+elif opcao == 2:
     escolha_tabela = int(input('QUAL TABELA DESEJA ATUALIZAR?\nCATEGORIAS = 1\nTAREFAS = 2\n'))
 
     if escolha_tabela == 1:
@@ -74,7 +76,7 @@ elif opcao == 6:
             atualizacao = 'UPDATE tarefas SET id_categorias = (?) where id_tarefas= (?)' 
             cursor.execute(atualizacao, valores)
 
-    elif opcao == 1:
+    elif opcao == 3:
         exclusao = int(input('QUAL TABELA DESEJA EXCLUIR?\n1- CATEGORIAS\n2- TAREFAS'))
         if exclusao == 1:
             cursor.execute('DROP TABLE categorias')
