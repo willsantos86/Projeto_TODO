@@ -24,7 +24,7 @@ opcao = int(input('[1]- INSERIR NOVOS VALORES.\n[2]- ATUALIZAR DADOS.\n[3]- EXCL
 print('-='*20)
     
 if opcao == 1:
-    tabela = int(input('QUAL TABELA DESEJA INSERIR NOVOS VALORES?\n>>> [1] CATEGORIAS ou [2] TAREFAS <<<\n'))
+    tabela = int(input('QUAL TABELA DESEJA INSERIR NOVOS VALORES?\n>>> [1] CATEGORIAS ou [2] TAREFAS <<<\n>>> '))
 
     if tabela == 1:
         nome_categoria = str(input('DIGITE A NOVA CATEGORIA:\n'))
@@ -36,53 +36,55 @@ if opcao == 1:
 
     elif tabela == 2:
         nome_tarefa = str(input('DIGITE A NOVA TAREFA:\n'))
-        status = str(input('Digite o status da tarefa:\n'))
-        categoria_id = str(input('Digite o ID da categoria:\nTRABALHO = 1\nFAMILIA = 2\nFACULDADE = 3\nCASA = 4\nIGREJA = 5\nVIAJEM = 6'))
+        status = str(input('DIGITE O STATUS DA TAREFA:\n>>> '))
+        categoria_id = str(input('DIGITE O ID DA CATEGORIA:\nTRABALHO = 1 / FAMILIA = 2 / FACULDADE = 3 / CASA = 4\nIGREJA = 5 / VIAJEM = 6 / CURSO DE INGLÊS = 7\n>>> '))
         valores = [nome_tarefa, status, categoria_id]
         inserir = 'INSERT INTO tarefas(nome_tarefa, status_tarefa, id_categorias) VALUES(?, ?, ?)'
         cursor.execute(inserir, valores)
 
 elif opcao == 2:
-    escolha_tabela = int(input('QUAL TABELA DESEJA ATUALIZAR?\nCATEGORIAS = 1\nTAREFAS = 2\n'))
+    escolha_tabela = int(input('QUAL TABELA DESEJA ATUALIZAR?\nCATEGORIAS = 1\nTAREFAS = 2\n>>>'))
+    print('-'*30)
 
     if escolha_tabela == 1:
-        nome_cat_atua = input('Digite nome atualizado:\n')
-        id = int(input('Digite o ID referente ao valor a ser atualizado:\n'))
+        id = int(input('DIGITE O ID REFERENTE AO VALOR A SER ATUALIZADO:\n>>> '))
+        nome_cat_atua = input('DIGITE O NOME ATUALIZADO:\n>>> ')
         valores = [nome_cat_atua, id]
         atualizacao = 'UPDATE categorias SET nome_categoria = (?) where id_categorias= (?)'
         cursor.execute(atualizacao, valores)
 
     if escolha_tabela == 2:
-        coluna = int(input('Qual coluna quer atualizar?\nNOME = 1\nSTATUS = 2\nID CATEGORIA = 3\n'))
+        coluna = int(input('QUAL COLUNA DESEJA ATUALIZAR?\nNOME = 1\nSTATUS = 2\nID CATEGORIA = 3\n>>> '))
+        print('-'*30)
 
         if coluna == 1:
-            id_tarefa = int(input('Digite o ID referente ao valor a ser atualizado:\n'))
-            nome_tarefa_atualizado = input('Digite nome atualizado:\n')
+            id_tarefa = int(input('DIGITE O ID REFERENTE AO VALOR A SER ATUALIZADO:\n>>> '))
+            nome_tarefa_atualizado = input('DIGITE NOME ATUALIZADO:\n>>> ')
             valores = [nome_tarefa_atualizado, id_tarefa]
             atualizacao = 'UPDATE tarefas SET nome_tarefa = (?) where id_tarefas= (?)' 
             cursor.execute(atualizacao, valores)
 
         elif coluna == 2:
-            id_status = int(input('Digite o ID referente ao status que será atualizado:\n'))
-            status_tarefa_atualizado = input('Digite o status atualizado:\n')
+            id_status = int(input('DIGITE O ID REFERENTE AO STATUS A SER ATUALIZADO:\n>>> '))
+            status_tarefa_atualizado = input('DIGITE NOME ATUALIZADO:\n>>> ')
             valores = [status_tarefa_atualizado, id_status]
             atualizacao = 'UPDATE tarefas SET status_tarefa = (?) where id_tarefas= (?)' 
             cursor.execute(atualizacao, valores)
 
         elif coluna == 3:
-            id_status = int(input('Digite o ID referente ao status que será atualizado:\n'))
-            id_cat_atua = int(input('Digite o novo ID_CATEGORIA atualizado:\n'))
+            id_status = int(input('DIGITE O ID REFERENTE AO VALOR A SER ATUALIZADO:\n>>> '))
+            id_cat_atua = int(input('DIGITE O NOVO ID_CATEGORIA:\n>>> '))
             valores = [id_cat_atua, id_status]
             atualizacao = 'UPDATE tarefas SET id_categorias = (?) where id_tarefas= (?)' 
             cursor.execute(atualizacao, valores)
 
     elif opcao == 3:
-        exclusao = int(input('QUAL TABELA DESEJA EXCLUIR?\n1- CATEGORIAS\n2- TAREFAS'))
+        exclusao = int(input('QUAL TABELA DESEJA EXCLUIR?\n1- CATEGORIAS\n2- TAREFAS\n>>> '))
+        print('-'*30)
         if exclusao == 1:
             cursor.execute('DROP TABLE categorias')
-        else:
+        elif exclusao == 2:
             cursor.execute('DROP TABLE tarefas')
-
 
 conexao.commit()
 conexao.close()
