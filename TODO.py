@@ -15,9 +15,9 @@ import sqlite3
 
 conexao = sqlite3.connect('exercicio_TODO')
 cursor = conexao.cursor()
-#cursor.execute('CREATE TABLE categorias (id_categorias INTEGER PRIMARY KEY AUTOINCREMENT, nome_categoria VARCHAR(100));')
-#cursor.execute('CREATE TABLE tarefas(id_tarefas INTEGER PRIMARY KEY AUTOINCREMENT, nome_tarefa VARCHAR(100), status_tarefa VARCHAR(100), id_categorias INT NOT NULL, FOREIGN KEY(id_categorias) REFERENCES categorias(id_tarefas));')
-#cursor.execute('ALTER TABLE categorias RENAME TO categorias_TODO')
+cursor.execute('CREATE TABLE categorias (id_categorias INTEGER PRIMARY KEY AUTOINCREMENT, nome_categoria VARCHAR(100));')
+cursor.execute('CREATE TABLE tarefas(id_tarefas INTEGER PRIMARY KEY AUTOINCREMENT, nome_tarefa VARCHAR(100), status_tarefa VARCHAR(100), id_categorias INT NOT NULL, FOREIGN KEY(id_categorias) REFERENCES categorias(id_tarefas));')
+cursor.execute('ALTER TABLE categorias RENAME TO categorias_TODO')
 print(f'{"ESCOLHA UMA DAS OPÇÕES ABAIXO":^40}')
 print('*'*40)
 opcao = int(input('[1]- INSERIR NOVOS VALORES.\n[2]- ATUALIZAR DADOS.\n[3]- EXCLUIR.\n>>>> '))
